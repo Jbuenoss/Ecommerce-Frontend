@@ -1,0 +1,16 @@
+#border-size {
+    border-width: 5px !important;
+}
+
+.background{
+    background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.background-form{
+    background:hsl(0, 0%, 95%);
+}
+
+#text-color-white{
+    color:white;
+}
