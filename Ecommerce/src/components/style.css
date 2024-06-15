@@ -14,3 +14,30 @@
 #text-color-white{
     color:white;
 }
+
+.valid{
+    color: green;
+}
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+.hide{
+    display: none;
+}
+
+.instructions{
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    margin-top:10px;
+}
+
+.offscreen{
+    position: absolute;
+    /* to accessibility */
+    left: -9999px;
+}
