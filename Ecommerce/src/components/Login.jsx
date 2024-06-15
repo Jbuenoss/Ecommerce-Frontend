@@ -11,7 +11,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function Login() {  
     const userRef = useRef();
-    const passawordRef = useRef();
+    const errorRef = useRef();
 
     //validate or not user
     const [user, setUser] = useState('');
@@ -28,7 +28,7 @@ function Login() {
     const [validMatch, setValidMatch] = useState(false);
     const [MatchFocus, setMatchFocus] = useState(false);
 
-    //For error
+    //For error and sucess
     const [errorMsg, setErrorMsg] = useState('');
     const [sucess, setSucess] = useState(false);
 
@@ -55,25 +55,44 @@ function Login() {
         setValidMatch(match);
     }, [password, matchPassword]);
 
+    useEffect(() => {
+        setErrorMsg('');
+    }, [user, password, matchPassword]);
+
 
     //vh: viewport
     return (
         <div className='d-flex align-items-center justify-content-center vh-100 background'>
+
+            {/* for display the error */}
+            <p ref={errorRef} className={errorMsg ? "errmsg" : "offscream"} aria-live="assertive">{errorMsg}</p>
+
             <Form className='border p-5 border-info rounded background-form' id='border-size'>
                 <Form.Group className="mb-3" controlId="Email-info">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Label htmlFor='username'>Email address</Form.Label>
+                    <Form.Control type="email" id='username' 
+                                    ref={userRef}
+                                    autoComplete='off' 
+                                    onChange={(e) => setUser(e.target.value)}
+                                    required 
+                                    aria-invalid={validName ? 'false' : 'true'} 
+                                    aria-describedby='uidnote'
+                                    onFocus={() => setUserFocus(true)}
+                                    onBlur={() => setUserFocus(false)}
+                                    placeholder="Enter email" />
                 </Form.Group>
  
                 <Form.Group className="mb-3" controlId="Password-info">
                     <Form.Label>Enter Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Remember me" />
                 </Form.Group>
+                
                 <Button variant="info" id='text-color-white' type="submit">
-                    Sign Up
+                    Login
                 </Button>
             </Form>
         </div>
