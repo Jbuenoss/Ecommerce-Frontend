@@ -1,0 +1,15 @@
+.Nav-bg{
+    background-color: #A28DE9;
+}
+
+.Nav-bg .navbar-brand,
+.Nav-bg .nav-link,
+.Nav-bg .nav-dropdown {
+    color: white;
+}
+
+.Nav-bg .navbar-brand:hover,
+.Nav-bg .nav-link:hover,
+.Nav-bg .nav-dropdown:hover {
+    color: hsl(0, 0%, 40%);
+}

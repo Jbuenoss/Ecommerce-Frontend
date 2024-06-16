@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar';
+import NavbarComponent from './components/NavbarComponent';
 import Footer from './components/Footer';
 import './App.css';
 
@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <Navbar/>
+      <NavbarComponent/>
       <Outlet/>
       <Footer/>
     </>
