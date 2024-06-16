@@ -11,7 +11,7 @@ import { FaCheck } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 
 //regex for validation
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX = /^[A-z][A-z0-9-_@.]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%-+]).{8,24}$/;
 
 function Register() {  
@@ -64,7 +64,17 @@ function Register() {
         setErrorMsg('');
     }, [user, password, matchPassword]);
 
-
+    async function handleSubmit(e){
+        //to cancel the event if necessary
+        e.preventDefault();
+        //if button enabled is modified with js hack
+        const v1 = USER_REGEX.test(user);
+        const v2 = PWD_REGEX.test(password);
+        if(!v1 || !v2){
+            setErrorMsg("Invalid entry");
+            return;
+        }
+    }
     //vh: viewport
     return (
         <section className='d-flex align-items-center justify-content-center vh-100 background'>
@@ -72,7 +82,8 @@ function Register() {
             {/* for display the error */}
             <p ref={errorRef} className={errorMsg ? "errmsg" : "offscream"} aria-live="assertive">{errorMsg}</p>
 
-            <Form className='border p-5 border-info rounded background-form' id='border-size'>
+            <Form className='border p-5 pb-2 border-info rounded background-form' 
+                    id='border-size' onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="Email-info">
                     <Form.Label>
                         Email address:
@@ -123,31 +134,38 @@ function Register() {
 
                 <Form.Group className="mb-3" controlId="ConfirmPassword-info">
                     <Form.Label>
-                        Enter Password
-                        <span className={validPassword ? 'valid' : 'hide'}><FaCheck/></span>
-                        <span className={validPassword || !password ? 'hide' : 'invalid'}><FaTimes/></span>
+                        Confirm Password
+                        <span className={validMatch && matchPassword ? 'valid' : 'hide'}><FaCheck/></span>
+                        <span className={validMatch || !matchPassword? 'hide' : 'invalid'}><FaTimes/></span>
                     </Form.Label>
 
                     <Form.Control type="password" 
                         placeholder="Confirm Password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setMatchPassword(e.target.value)}
                         required
-                        aria-invalid={validPassword ? 'false' : 'true'} 
-                        aria-describedby='pwdnote'
-                        onFocus={() => setPasswordFocus(true)}
-                        onBlur={() => setPasswordFocus(false)} />
-                    <p id='pwdnote' className={passwordFocus && password && !validPassword ? "instructions" : "offscreen"}>
+                        aria-invalid={validMatch ? 'false' : 'true'} 
+                        aria-describedby='confirmnote'
+                        onFocus={() => setMatchFocus(true)}
+                        onBlur={() => setMatchFocus(false)} />
+                    <p id='confirmnote' className={MatchFocus && !validMatch ? "instructions" : "offscreen"}>
                         <FaInfoCircle />
-                        8 to 24 characteres<br/>
-                        must include uppercase and lowercase letters, a number and special 
-                        character.<br/>
+                        must match the first password input field
                     </p>
                 </Form.Group>
                 
-                <Button variant="info" id='text-color-white' type="submit">
+                <Button variant="info" 
+                    id='text-color-white' 
+                    className="mb-3"
+                    type="submit"
+                    disabled={!validName || !validPassword || !validMatch}>
                     Sign Up
                 </Button>
+                <p>
+                    Already Registered?<a href="#">Sign in</a>
+                </p>
             </Form>
+
+            
         </section>
     );
 
