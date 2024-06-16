@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 //css
 import './style.css';
+//axios
+import axios from '../api/axios';
 //icons
 import { FaInfoCircle } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
@@ -14,7 +16,9 @@ import { FaTimes } from "react-icons/fa";
 const USER_REGEX = /^[A-z][A-z0-9-_@.]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%-+]).{8,24}$/;
 
-function Register() {  
+const REGISTER_URL = '/User';
+
+function Register() {
     const userRef = useRef();
     const errorRef = useRef();
 
@@ -64,109 +68,151 @@ function Register() {
         setErrorMsg('');
     }, [user, password, matchPassword]);
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         //to cancel the event if necessary
         e.preventDefault();
         //if button enabled is modified with js hack
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(password);
-        if(!v1 || !v2){
+        if (!v1 || !v2) {
             setErrorMsg("Invalid entry");
             return;
+        }
+        try {
+            const response = await axios.post(REGISTER_URL,
+                JSON.stringify({
+                    "name": user,
+                    "email": user,
+                    "password": password,
+                    "products": [
+                    ]
+                }),
+                {
+                    headers : { 'content-type' : 'application/json' },
+                    withCredentials : true
+                }
+            );
+            console.log(response.data);
+            console.log(JSON.stringify(response));
+            setSucess(true);
+            setUser('');
+            setPassword('');
+            setMatchPassword('');
+        } catch (err) {
+            // ?. give erro wihtout exception, verify if null
+            if(!err?.response){
+                setErrorMsg("no server response");
+            } else if(err.response?.status === 409){
+                //usarName already taken
+                setErrorMsg("Usarname taken");
+            } else{
+                setErrorMsg("Registration failed");
+            }
+            errorRef.current.focus();
         }
     }
     //vh: viewport
     return (
-        <section className='d-flex align-items-center justify-content-center vh-100 background'>
+        <>
+            {sucess ? (
+                <section>
+                    <p>Sucess Sign up!</p>
+                    <p>Main Page</p>
+                    <a href='#'>Sign in</a>
+                </section>
+            ) : (
 
-            {/* for display the error */}
-            <p ref={errorRef} className={errorMsg ? "errmsg" : "offscream"} aria-live="assertive">{errorMsg}</p>
+                <section className='d-flex align-items-center justify-content-center vh-100 background'>
 
-            <Form className='border p-5 pb-2 border-info rounded background-form' 
-                    id='border-size' onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="Email-info">
-                    <Form.Label>
-                        Email address:
-                        <span className={validName ? 'valid' : 'hide'}><FaCheck/></span>
-                        <span className={validName || !user ? 'hide' : 'invalid'}><FaTimes/></span>
-                    </Form.Label>
+                    
 
-                    <Form.Control type="email"
-                                    ref={userRef}
-                                    autoComplete='off' 
-                                    onChange={(e) => setUser(e.target.value)}
-                                    required 
-                                    aria-invalid={validName ? 'false' : 'true'} 
-                                    aria-describedby='uidnote'
-                                    onFocus={() => setUserFocus(true)}
-                                    onBlur={() => setUserFocus(false)}
-                                    placeholder="Enter email" />
-                    <p id='uidnote' className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                        <FaInfoCircle />
-                        4 to 24 characteres<br/>
-                        must begin with a letter<br/>
-                        Letters, numbers, undescores, hyphens allowed.
-                    </p>
-                </Form.Group>
- 
-                <Form.Group className="mb-3" controlId="Password-info">
-                    <Form.Label>
-                        Enter Password
-                        <span className={validPassword ? 'valid' : 'hide'}><FaCheck/></span>
-                        <span className={validPassword || !password ? 'hide' : 'invalid'}><FaTimes/></span>
-                    </Form.Label>
+                    <Form className='border p-5 pb-2 border-info rounded background-form'
+                        id='border-size' onSubmit={handleSubmit}>
+                            {/* for display the error */}
+                        <p ref={errorRef} className={errorMsg ? "errmsg" : "offscream"} aria-live="assertive">{errorMsg}</p>
+                        <Form.Group className="mb-3" controlId="Email-info">
+                            <Form.Label>
+                                Email address:
+                                <span className={validName ? 'valid' : 'hide'}><FaCheck /></span>
+                                <span className={validName || !user ? 'hide' : 'invalid'}><FaTimes /></span>
+                            </Form.Label>
 
-                    <Form.Control type="password" 
-                        placeholder="Password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        aria-invalid={validPassword ? 'false' : 'true'} 
-                        aria-describedby='pwdnote'
-                        onFocus={() => setPasswordFocus(true)}
-                        onBlur={() => setPasswordFocus(false)} />
-                    <p id='pwdnote' className={passwordFocus && password && !validPassword ? "instructions" : "offscreen"}>
-                        <FaInfoCircle />
-                        8 to 24 characteres<br/>
-                        must include uppercase and lowercase letters, a number and special 
-                        character.<br/>
-                    </p>
-                </Form.Group>
+                            <Form.Control type="email"
+                                ref={userRef}
+                                autoComplete='off'
+                                onChange={(e) => setUser(e.target.value)}
+                                required
+                                aria-invalid={validName ? 'false' : 'true'}
+                                aria-describedby='uidnote'
+                                onFocus={() => setUserFocus(true)}
+                                onBlur={() => setUserFocus(false)}
+                                placeholder="Enter email" />
+                            <p id='uidnote' className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+                                <FaInfoCircle />
+                                4 to 24 characteres<br />
+                                must begin with a letter<br />
+                                Letters, numbers, undescores, hyphens allowed.
+                            </p>
+                        </Form.Group>
 
-                <Form.Group className="mb-3" controlId="ConfirmPassword-info">
-                    <Form.Label>
-                        Confirm Password
-                        <span className={validMatch && matchPassword ? 'valid' : 'hide'}><FaCheck/></span>
-                        <span className={validMatch || !matchPassword? 'hide' : 'invalid'}><FaTimes/></span>
-                    </Form.Label>
+                        <Form.Group className="mb-3" controlId="Password-info">
+                            <Form.Label>
+                                Enter Password
+                                <span className={validPassword ? 'valid' : 'hide'}><FaCheck /></span>
+                                <span className={validPassword || !password ? 'hide' : 'invalid'}><FaTimes /></span>
+                            </Form.Label>
 
-                    <Form.Control type="password" 
-                        placeholder="Confirm Password"
-                        onChange={(e) => setMatchPassword(e.target.value)}
-                        required
-                        aria-invalid={validMatch ? 'false' : 'true'} 
-                        aria-describedby='confirmnote'
-                        onFocus={() => setMatchFocus(true)}
-                        onBlur={() => setMatchFocus(false)} />
-                    <p id='confirmnote' className={MatchFocus && !validMatch ? "instructions" : "offscreen"}>
-                        <FaInfoCircle />
-                        must match the first password input field
-                    </p>
-                </Form.Group>
-                
-                <Button variant="info" 
-                    id='text-color-white' 
-                    className="mb-3"
-                    type="submit"
-                    disabled={!validName || !validPassword || !validMatch}>
-                    Sign Up
-                </Button>
-                <p>
-                    Already Registered?<a href="#">Sign in</a>
-                </p>
-            </Form>
+                            <Form.Control type="password"
+                                placeholder="Password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                aria-invalid={validPassword ? 'false' : 'true'}
+                                aria-describedby='pwdnote'
+                                onFocus={() => setPasswordFocus(true)}
+                                onBlur={() => setPasswordFocus(false)} />
+                            <p id='pwdnote' className={passwordFocus && password && !validPassword ? "instructions" : "offscreen"}>
+                                <FaInfoCircle />
+                                8 to 24 characteres<br />
+                                must include uppercase and lowercase letters, a number and special
+                                character.<br />
+                            </p>
+                        </Form.Group>
 
-            
-        </section>
+                        <Form.Group className="mb-3" controlId="ConfirmPassword-info">
+                            <Form.Label>
+                                Confirm Password
+                                <span className={validMatch && matchPassword ? 'valid' : 'hide'}><FaCheck /></span>
+                                <span className={validMatch || !matchPassword ? 'hide' : 'invalid'}><FaTimes /></span>
+                            </Form.Label>
+
+                            <Form.Control type="password"
+                                placeholder="Confirm Password"
+                                onChange={(e) => setMatchPassword(e.target.value)}
+                                required
+                                aria-invalid={validMatch ? 'false' : 'true'}
+                                aria-describedby='confirmnote'
+                                onFocus={() => setMatchFocus(true)}
+                                onBlur={() => setMatchFocus(false)} />
+                            <p id='confirmnote' className={MatchFocus && !validMatch ? "instructions" : "offscreen"}>
+                                <FaInfoCircle />
+                                must match the first password input field
+                            </p>
+                        </Form.Group>
+
+                        <Button variant="info"
+                            id='text-color-white'
+                            className="mb-3"
+                            type="submit"
+                            disabled={!validName || !validPassword || !validMatch}>
+                            Sign Up
+                        </Button>
+                        <p>
+                            Already Registered?<a href="#">Sign in</a>
+                        </p>
+                    </Form>
+                </section>
+            )}
+        </>
     );
 
 }
