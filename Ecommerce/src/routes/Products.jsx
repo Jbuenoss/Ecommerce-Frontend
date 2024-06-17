@@ -1,49 +1,35 @@
 import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
 import './style.css';
+import CardComponent from '../components/CardComponent';
 
-import photoProduct from '../assets/Generic product.jpg';
+import { useEffect, useState } from 'react';
+
+import axios from '../api/axios';
 
 function Products() {
 
+    const ProductUrl = '/product';
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(ProductUrl);
+                setProducts(response.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        
+        fetchData();
+    }, []);
+
+
     return (
         <Container className='d-flex flex-wrap justify-content-center'>
-            <Card className='card-ctm mt-3'>
-                <Card.Img className='card-img-ctm' variant="top" src={photoProduct} />
-                <Card.Body className='card-body-ctm d-flex flex-column' >
-                    <Card.Title>name of Card</Card.Title>
-                    <Card.Text className='mt-auto mb-1'>
-                        price:
-                    </Card.Text>
-                    <Card.Text>
-                        Quantity:
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-            <Card className='card-ctm mt-3 ms-3'>
-                <Card.Img className='card-img-ctm' variant="top" src={photoProduct} />
-                <Card.Body className='card-body-ctm d-flex flex-column' >
-                    <Card.Title>name of Card</Card.Title>
-                    <Card.Text className='mt-auto mb-1'>
-                        price:
-                    </Card.Text>
-                    <Card.Text>
-                        Quantity:
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-            <Card className='card-ctm mt-3 ms-3'>
-                <Card.Img className='card-img-ctm' variant="top" src={photoProduct} />
-                <Card.Body className='card-body-ctm d-flex flex-column' >
-                    <Card.Title>name of Card</Card.Title>
-                    <Card.Text className='mt-auto mb-1'>
-                        price:
-                    </Card.Text>
-                    <Card.Text>
-                        Quantity:
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+            {products.map((element) => {
+                return <CardComponent key={element.id} product={element} />
+            })}
         </Container>
     );
 }

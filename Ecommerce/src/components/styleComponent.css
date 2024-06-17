@@ -13,3 +13,25 @@
 .Nav-bg .nav-dropdown:hover {
     color: hsl(0, 0%, 40%);
 }
+
+.card-ctm{
+    width:200px;
+    min-width: 200;
+    border: 2px solid hsl(0, 0%, 70%) !important;
+    /* box-shadow: 2px 2px 5px 2px hsl(0, 0%, 70%); */
+    cursor: pointer;
+}
+
+.card-ctm:hover{
+    /* box-shadow: 2px 2px 5px 2px #A28DE9; */
+    border: 2px solid #A28DE9 !important;
+}
+
+.card-img-ctm{
+    height: 200px;
+    object-fit:cover;
+}
+
+.card-body-ctm{
+    height: 180px;
+}
