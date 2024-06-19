@@ -30,11 +30,11 @@ function Home() {
 
     return (
         <>
-            <div className='banner-ctm d-flex justify-content-center align-items-center text-center'>
-                <Row className='img-banner'>
-                    <Col sm><img src={imgMain} /></Col>
-                    <Col sm className='me-3'>
-                        <h2 className='text-white h-100 d-flex align-items-center text-center'>
+            <div className='d-flex justify-content-center align-items-center text-center'>
+                <Row className='img-banner p-4'>
+                    <Col md={6} sm={12}><img src={imgMain} /></Col>
+                    <Col md={6} sm={12}>
+                        <h2 className='me-md-2 me-0 text-white h-100 d-flex align-items-center text-center pb-5 pb-md-0'>
                             Welcome to Ecommerce - Your Ultimate Destination for All Your Needs!
                         </h2>
                     </Col>
