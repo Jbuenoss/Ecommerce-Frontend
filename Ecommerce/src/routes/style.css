@@ -47,3 +47,22 @@ Form {
     /* to accessibility */
     left: -9999px;
 }
+
+.img-banner{
+    background-color: #A28DE9;
+    width:100%;
+}
+
+.img-banner img{
+    height: 400px;
+    object-fit: cover;
+}
+
+.card-wrapper{
+    max-width: 100%;
+}
+.card-list{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    overflow-x:auto;
+}

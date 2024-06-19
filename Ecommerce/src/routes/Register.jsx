@@ -99,7 +99,7 @@ function Register() {
             setPassword('');
             setMatchPassword('');
         } catch (err) {
-            // ?. give erro wihtout exception, verify if null
+            // ?. give erro wihtout exception, verify if null, optional chaining operator
             if(!err?.response){
                 setErrorMsg("no server response");
             } else if(err.response?.status === 409){
