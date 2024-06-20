@@ -26,7 +26,7 @@ function Products() {
 
 
     return (
-        <Container className='d-flex flex-wrap justify-content-center'>
+        <Container className='d-flex flex-wrap justify-content-center mb-4'>
             {products.map((element) => {
                 return <CardComponent key={element.id} product={element} />
             })}

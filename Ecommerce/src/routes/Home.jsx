@@ -41,13 +41,13 @@ function Home() {
                 </Row>
             </div>
 
-            <Container className='d-flex flex-row card-wrapper'>
+            <Container className='card-wrapper mb-4'>
+                <h2 className='text-center mt-3'>Products in promotion</h2>
                 <div className='card-list'>
                     {productsInPromotion.map((element) => {
                         return <CardComponent key={element.id} product={element} />
                     })}
                 </div>
-
             </Container>
         </>
     );

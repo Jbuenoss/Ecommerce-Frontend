@@ -35,3 +35,12 @@
 .card-body-ctm{
     height: 180px;
 }
+
+.footer-ctm{
+    background-color:#A28DE9;
+    border:1px solid #A28DE9;
+}
+
+p a{
+    text-decoration:none;
+}
