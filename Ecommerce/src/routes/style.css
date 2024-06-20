@@ -1,5 +1,5 @@
 Form {
-    min-height: 400px;
+    min-height: 420px;
     max-width: 400px;
     width: 100%;
 }
@@ -9,15 +9,17 @@ Form {
 }
 
 .background {
-    background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
-    color: rgba(0, 0, 0, 0.6);
+    background: linear-gradient(hsl(254, 68%, 73%), hsl(254, 68%, 83%));
+    color: rgba(116, 115, 115, 0.6);
 }
 
 .background-form {
     background: hsl(0, 0%, 95%);
+    width:500px;
 }
 
 #text-color-white {
+    background-color: #A28DE9;
     color: white;
 }
 
@@ -55,6 +57,10 @@ Form {
     width: 100%;
 }
 
+.background-ctm{
+    background-color: #A28DE9;
+}
+
 .img-banner img {
     height: 400px;
     object-fit: cover;
@@ -68,4 +74,8 @@ Form {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     overflow-x: auto;
+}
+
+.img-ctm{
+    height:420px;
 }

@@ -12,6 +12,7 @@ function NavbarComponent() {
   const location = useLocation();
   console.log(location.pathname);
 
+  //all the other pages has the purple navbar
   let classes = 'Nav-bg';
   if (location.pathname == '/login' || location.pathname == '/register') {
     classes = 'Nav-bg-white';
