@@ -1,13 +1,20 @@
 import './styleComponent.css';
 import Container from 'react-bootstrap/Container';
 import { FaGithub } from "react-icons/fa";
+import { useLocation } from 'react-router-dom';
 
 function Footer(){
 
     let dateNow = new Date();
 
+    const location = useLocation();
+    let classes = 'footer-ctm text-white';
+    if(location.pathname == '/login' || location.pathname == '/register'){
+        classes = 'footer-ctm-white';
+    }
+
     return(
-        <footer className='footer-ctm text-white text-center'>
+        <footer className={` ${classes} text-center`}>
             <Container>
                 <h2 className='py-4 border-bottom'>ECOMMERCE</h2>
             </Container>

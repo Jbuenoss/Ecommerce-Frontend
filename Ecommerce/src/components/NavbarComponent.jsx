@@ -5,12 +5,20 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import './styleComponent.css';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function NavbarComponent() {
 
+  const location = useLocation();
+  console.log(location.pathname);
+
+  let classes = 'Nav-bg';
+  if (location.pathname == '/login' || location.pathname == '/register') {
+    classes = 'Nav-bg-white';
+  } 
+
   return (
-    <Navbar expand="sm" className="Nav-bg p-3">
+    <Navbar expand="sm" className={` ${classes} p-3`}>
 
       <Container>
         <Link className='navbar-brand fs-4 fw-bold' to='/' >ECOMMERCE</Link>
