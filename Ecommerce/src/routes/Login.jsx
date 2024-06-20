@@ -1,7 +1,22 @@
+//hooks
 import { useState, useRef, useEffect } from 'react';
-
+//bootstrap
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+//css and image
+import './style.css';
+import logo from '../assets/Ecommerce_rigth-removebg-preview.png'
+//axios
+import axios from '../api/axios';
+//icons
+import { FaInfoCircle } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
+//react-router
+import { Link } from 'react-router-dom';
+
 
 import './style.css';
 
@@ -62,40 +77,92 @@ function Login() {
 
     //vh: viewport
     return (
-        <div className='d-flex align-items-center justify-content-center vh-100 background'>
+        <>
+        {sucess ? (
+            <section>
+                <p>Sucess Sign up!</p>
+                <p>Main Page</p>
+                <a href='#'>Sign in</a>
+            </section>
+        ) : (
 
-            {/* for display the error */}
-            <p ref={errorRef} className={errorMsg ? "errmsg" : "offscream"} aria-live="assertive">{errorMsg}</p>
+            <section className='d-flex align-items-center justify-content-center background my-sm-2 py-sm-5'>
+                <div className='py-sm-5'>
+                    <Row className='pb-5 pt-sm-5'>
+                        <Col className='me-2 d-flex align-items-center justify-content-center'>
+                            <img src={logo} className='img-ctm'></img>
+                        </Col>
+                        <Col className='ms-2 d-flex align-items-center justify-content-center'>
+                            <Form className='px-5 pt-4 pb-2 rounded background-form'
+                                id='border-size' >
+                                {/* for display the error */}
+                                <p ref={errorRef} className={errorMsg ? "errmsg" : "offscream"} aria-live="assertive">{errorMsg}</p>
+                                <Form.Group className="mb-3" controlId="Email-info">
+                                    <Form.Label>
+                                        Email address:
+                                        <span className={validName ? 'valid' : 'hide'}><FaCheck /></span>
+                                        <span className={validName || !user ? 'hide' : 'invalid'}><FaTimes /></span>
+                                    </Form.Label>
 
-            <Form className='border p-5 border-info rounded background-form' id='border-size'>
-                <Form.Group className="mb-3" controlId="Email-info">
-                    <Form.Label htmlFor='username'>Email address</Form.Label>
-                    <Form.Control type="email" id='username' 
-                                    ref={userRef}
-                                    autoComplete='off' 
-                                    onChange={(e) => setUser(e.target.value)}
-                                    required 
-                                    aria-invalid={validName ? 'false' : 'true'} 
-                                    aria-describedby='uidnote'
-                                    onFocus={() => setUserFocus(true)}
-                                    onBlur={() => setUserFocus(false)}
-                                    placeholder="Enter email" />
-                </Form.Group>
- 
-                <Form.Group className="mb-3" controlId="Password-info">
-                    <Form.Label>Enter Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
+                                    <Form.Control type="email"
+                                        ref={userRef}
+                                        autoComplete='off'
+                                        onChange={(e) => setUser(e.target.value)}
+                                        required
+                                        aria-invalid={validName ? 'false' : 'true'}
+                                        aria-describedby='uidnote'
+                                        onFocus={() => setUserFocus(true)}
+                                        onBlur={() => setUserFocus(false)}
+                                        placeholder="Enter email" />
+                                    <p id='uidnote' className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+                                        <FaInfoCircle />
+                                        4 to 24 characteres<br />
+                                        must begin with a letter<br />
+                                        Letters, numbers, undescores, hyphens allowed.
+                                    </p>
+                                </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Remember me" />
-                </Form.Group>
-                
-                <Button variant="info" id='text-color-white' type="submit">
-                    Login
-                </Button>
-            </Form>
-        </div>
+                                <Form.Group className="mb-3" controlId="Password-info">
+                                    <Form.Label>
+                                        Enter Password
+                                        <span className={validPassword ? 'valid' : 'hide'}><FaCheck /></span>
+                                        <span className={validPassword || !password ? 'hide' : 'invalid'}><FaTimes /></span>
+                                    </Form.Label>
+
+                                    <Form.Control type="password"
+                                        placeholder="Password"
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                        aria-invalid={validPassword ? 'false' : 'true'}
+                                        aria-describedby='pwdnote'
+                                        onFocus={() => setPasswordFocus(true)}
+                                        onBlur={() => setPasswordFocus(false)} />
+                                    <p id='pwdnote' className={passwordFocus && password && !validPassword ? "instructions" : "offscreen"}>
+                                        <FaInfoCircle />
+                                        8 to 24 characteres<br />
+                                        must include uppercase and lowercase letters, a number and special
+                                        character.<br />
+                                    </p>
+                                </Form.Group>
+
+                                <Button variant=""
+                                    id='text-color-white'
+                                    className="mb-3 mt-5"
+                                    type="submit"
+                                    disabled={!validName || !validPassword || !validMatch}>
+                                    Sign in
+                                </Button>
+                                <p>
+                                    not Registered?<Link to='/register'>Sign up</Link>
+                                </p>
+                            </Form>
+                        </Col>
+                    </Row>
+                </div>
+
+            </section>
+        )}
+    </>
     );
 
 }
