@@ -10,7 +10,6 @@ import { Link, useLocation } from 'react-router-dom';
 function NavbarComponent() {
 
   const location = useLocation();
-  console.log(location.pathname);
 
   //all the other pages has the purple navbar
   let classes = 'Nav-bg';

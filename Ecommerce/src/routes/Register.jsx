@@ -15,8 +15,7 @@ import { FaInfoCircle } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 //react-router
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -47,7 +46,7 @@ function Register() {
 
     //For error and sucess
     const [errorMsg, setErrorMsg] = useState('');
-    const [sucess, setSucess] = useState(false);
+    const navigate = useNavigate();
 
     //to focus in the name input when open this page
     useEffect(() => {
@@ -102,10 +101,10 @@ function Register() {
             );
             console.log(response.data);
             console.log(JSON.stringify(response));
-            setSucess(true);
             setUser('');
             setPassword('');
             setMatchPassword('');
+            return navigate('/login');
         } catch (err) {
             // ?. give erro wihtout exception, verify if null, optional chaining operator
             if (!err?.response) {
@@ -121,115 +120,104 @@ function Register() {
     }
     //vh: viewport
     return (
-        <>
-            {sucess ? (
-                <section>
-                    <p>Sucess Sign up!</p>
-                    <p>Main Page</p>
-                    <a href='#'>Sign in</a>
-                </section>
-            ) : (
 
-                <section className='d-flex align-items-center justify-content-center background my-sm-2 py-sm-5'>
-                    <div className='py-sm-5'>
-                        <Row className='pb-5 pt-sm-5'>
-                            <Col className='me-2 d-flex align-items-center justify-content-center'>
-                                <img src={logo} className='img-ctm'></img>
-                            </Col>
-                            <Col className='ms-2 d-flex align-items-center justify-content-center'>
-                                <Form className='px-5 pt-4 pb-2 rounded background-form'
-                                    id='border-size' onSubmit={handleSubmit}>
-                                    {/* for display the error */}
-                                    <p ref={errorRef} className={errorMsg ? "errmsg" : "offscream"} aria-live="assertive">{errorMsg}</p>
-                                    <Form.Group className="mb-3" controlId="Email-info">
-                                        <Form.Label>
-                                            Email address:
-                                            <span className={validName ? 'valid' : 'hide'}><FaCheck /></span>
-                                            <span className={validName || !user ? 'hide' : 'invalid'}><FaTimes /></span>
-                                        </Form.Label>
+        <section className='d-flex align-items-center justify-content-center background my-sm-2 py-sm-5'>
+            <div className='py-sm-5'>
+                <Row className='pb-5 pt-sm-5'>
+                    <Col className='me-2 d-flex align-items-center justify-content-center'>
+                        <img src={logo} className='img-ctm'></img>
+                    </Col>
+                    <Col className='ms-2 d-flex align-items-center justify-content-center'>
+                        <Form className='px-5 pt-4 pb-2 rounded background-form'
+                            id='border-size' onSubmit={handleSubmit}>
+                            {/* for display the error */}
+                            <p ref={errorRef} className={errorMsg ? "errmsg" : "offscream"} aria-live="assertive">{errorMsg}</p>
+                            <Form.Group className="mb-3" controlId="Email-info">
+                                <Form.Label>
+                                    Email address:
+                                    <span className={validName ? 'valid' : 'hide'}><FaCheck /></span>
+                                    <span className={validName || !user ? 'hide' : 'invalid'}><FaTimes /></span>
+                                </Form.Label>
 
-                                        <Form.Control type="email"
-                                            ref={userRef}
-                                            autoComplete='off'
-                                            onChange={(e) => setUser(e.target.value)}
-                                            required
-                                            aria-invalid={validName ? 'false' : 'true'}
-                                            aria-describedby='uidnote'
-                                            onFocus={() => setUserFocus(true)}
-                                            onBlur={() => setUserFocus(false)}
-                                            placeholder="Enter email" />
-                                        <p id='uidnote' className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                                            <FaInfoCircle />
-                                            4 to 24 characteres<br />
-                                            must begin with a letter<br />
-                                            Letters, numbers, undescores, hyphens allowed.
-                                        </p>
-                                    </Form.Group>
+                                <Form.Control type="email"
+                                    ref={userRef}
+                                    autoComplete='off'
+                                    onChange={(e) => setUser(e.target.value)}
+                                    required
+                                    aria-invalid={validName ? 'false' : 'true'}
+                                    aria-describedby='uidnote'
+                                    onFocus={() => setUserFocus(true)}
+                                    onBlur={() => setUserFocus(false)}
+                                    placeholder="Enter email" />
+                                <p id='uidnote' className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+                                    <FaInfoCircle />
+                                    4 to 24 characteres<br />
+                                    must begin with a letter<br />
+                                    Letters, numbers, undescores, hyphens allowed.
+                                </p>
+                            </Form.Group>
 
-                                    <Form.Group className="mb-3" controlId="Password-info">
-                                        <Form.Label>
-                                            Enter Password
-                                            <span className={validPassword ? 'valid' : 'hide'}><FaCheck /></span>
-                                            <span className={validPassword || !password ? 'hide' : 'invalid'}><FaTimes /></span>
-                                        </Form.Label>
+                            <Form.Group className="mb-3" controlId="Password-info">
+                                <Form.Label>
+                                    Enter Password
+                                    <span className={validPassword ? 'valid' : 'hide'}><FaCheck /></span>
+                                    <span className={validPassword || !password ? 'hide' : 'invalid'}><FaTimes /></span>
+                                </Form.Label>
 
-                                        <Form.Control type="password"
-                                            placeholder="Password"
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            required
-                                            aria-invalid={validPassword ? 'false' : 'true'}
-                                            aria-describedby='pwdnote'
-                                            onFocus={() => setPasswordFocus(true)}
-                                            onBlur={() => setPasswordFocus(false)} />
-                                        <p id='pwdnote' className={passwordFocus && password && !validPassword ? "instructions" : "offscreen"}>
-                                            <FaInfoCircle />
-                                            8 to 24 characteres<br />
-                                            must include uppercase and lowercase letters, a number and special
-                                            character.<br />
-                                        </p>
-                                    </Form.Group>
+                                <Form.Control type="password"
+                                    placeholder="Password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    aria-invalid={validPassword ? 'false' : 'true'}
+                                    aria-describedby='pwdnote'
+                                    onFocus={() => setPasswordFocus(true)}
+                                    onBlur={() => setPasswordFocus(false)} />
+                                <p id='pwdnote' className={passwordFocus && password && !validPassword ? "instructions" : "offscreen"}>
+                                    <FaInfoCircle />
+                                    8 to 24 characteres<br />
+                                    must include uppercase and lowercase letters, a number and special
+                                    character.<br />
+                                </p>
+                            </Form.Group>
 
-                                    <Form.Group className="mb-3" controlId="ConfirmPassword-info">
-                                        <Form.Label>
-                                            Confirm Password
-                                            <span className={validMatch && matchPassword ? 'valid' : 'hide'}><FaCheck /></span>
-                                            <span className={validMatch || !matchPassword ? 'hide' : 'invalid'}><FaTimes /></span>
-                                        </Form.Label>
+                            <Form.Group className="mb-3" controlId="ConfirmPassword-info">
+                                <Form.Label>
+                                    Confirm Password
+                                    <span className={validMatch && matchPassword ? 'valid' : 'hide'}><FaCheck /></span>
+                                    <span className={validMatch || !matchPassword ? 'hide' : 'invalid'}><FaTimes /></span>
+                                </Form.Label>
 
-                                        <Form.Control type="password"
-                                            placeholder="Confirm Password"
-                                            onChange={(e) => setMatchPassword(e.target.value)}
-                                            required
-                                            aria-invalid={validMatch ? 'false' : 'true'}
-                                            aria-describedby='confirmnote'
-                                            onFocus={() => setMatchFocus(true)}
-                                            onBlur={() => setMatchFocus(false)} />
-                                        <p id='confirmnote' className={MatchFocus && !validMatch ? "instructions" : "offscreen"}>
-                                            <FaInfoCircle />
-                                            must match the first password input field
-                                        </p>
-                                    </Form.Group>
+                                <Form.Control type="password"
+                                    placeholder="Confirm Password"
+                                    onChange={(e) => setMatchPassword(e.target.value)}
+                                    required
+                                    aria-invalid={validMatch ? 'false' : 'true'}
+                                    aria-describedby='confirmnote'
+                                    onFocus={() => setMatchFocus(true)}
+                                    onBlur={() => setMatchFocus(false)} />
+                                <p id='confirmnote' className={MatchFocus && !validMatch ? "instructions" : "offscreen"}>
+                                    <FaInfoCircle />
+                                    must match the first password input field
+                                </p>
+                            </Form.Group>
 
-                                    <Button variant=""
-                                        id='text-color-white'
-                                        className="mb-3"
-                                        type="submit"
-                                        disabled={!validName || !validPassword || !validMatch}>
-                                        Sign Up
-                                    </Button>
-                                    <p>
-                                        Already Registered?<Link to='/login'>Sign in</Link>
-                                    </p>
-                                </Form>
-                            </Col>
-                        </Row>
-                    </div>
+                            <Button variant=""
+                                id='text-color-white'
+                                className="mb-3"
+                                type="submit"
+                                disabled={!validName || !validPassword || !validMatch}>
+                                Sign Up
+                            </Button>
+                            <p>
+                                Already Registered?<Link to='/login'>Sign in</Link>
+                            </p>
+                        </Form>
+                    </Col>
+                </Row>
+            </div>
 
-                </section>
-            )}
-        </>
-    );
-
+        </section>
+    )
 }
 
 export default Register
