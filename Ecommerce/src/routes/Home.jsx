@@ -3,7 +3,7 @@ import axios from '../api/axios';
 
 import CardComponent from '../components/CardComponent';
 
-import imgMain from '../assets/Ecommerce rigth.png';
+import imgMain from '../assets/Ecommerce_rigth-removebg-preview.png';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

@@ -53,7 +53,7 @@ Form {
 }
 
 .img-banner {
-    background-color: #A28DE9;
+    background: linear-gradient(hsl(254, 68%, 73%), hsl(254, 68%, 83%));
     width: 100%;
 }
 

@@ -10,10 +10,6 @@ import './style.css';
 import logo from '../assets/Ecommerce_rigth-removebg-preview.png'
 //axios
 import axios from '../api/axios';
-//icons
-import { FaInfoCircle } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
 //react-router
 import { Link, useNavigate } from 'react-router-dom';
 
