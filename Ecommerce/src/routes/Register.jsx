@@ -99,8 +99,6 @@ function Register() {
                     withCredentials: true
                 }
             );
-            console.log(response.data);
-            console.log(JSON.stringify(response));
             setUser('');
             setPassword('');
             setMatchPassword('');
@@ -111,7 +109,7 @@ function Register() {
                 setErrorMsg("no server response");
             } else if (err.response?.status === 409) {
                 //usarName already taken
-                setErrorMsg("Usarname taken");
+                setErrorMsg("username already taken");
             } else {
                 setErrorMsg("Registration failed");
             }

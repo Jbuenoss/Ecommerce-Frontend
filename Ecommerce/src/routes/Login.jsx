@@ -1,5 +1,6 @@
 //hooks
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
+import AuthContext from '../context/AuthProvider';
 //bootstrap
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -21,6 +22,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function Login() {
+    const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errorRef = useRef();
 
@@ -42,13 +44,28 @@ function Login() {
     const urlUsers = '/User';
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.get(urlUsers);
-        const users = response.data;
-        const currentUser = users.find(u => u.email === user);
-        if(currentUser.password === password){
-            navigate("/");
+        try {
+            const response = await axios.get(urlUsers);
+            const users = response.data;
+            const currentUser = users.find(u => u.email === user);
+            if (currentUser?.password === password) {
+                setUser('');
+                setPassword('');
+                setAuth({ user, password });
+                return navigate("/");
+            } else{
+                setErrorMsg("User or Passaword are not correct");
+            }
+            
+        } catch (err) {
+            if(!err?.response){
+                setErrorMsg('No server response');
+            } else{
+                setErrorMsg('Login Failed');
+            }
+            errorRef.current.focus();
         }
-        setErrorMsg("User or Passaword are not correct");
+
     }
 
     return (
