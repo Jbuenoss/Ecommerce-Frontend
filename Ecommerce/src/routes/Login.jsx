@@ -38,10 +38,17 @@ function Login() {
         setErrorMsg('');
     }, [user, password]);
 
+
+    const urlUsers = '/User';
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user, password);
-        navigate("/");
+        const response = await axios.get(urlUsers);
+        const users = response.data;
+        const currentUser = users.find(u => u.email === user);
+        if(currentUser.password === password){
+            navigate("/");
+        }
+        setErrorMsg("User or Passaword are not correct");
     }
 
     return (
