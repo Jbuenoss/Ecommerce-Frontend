@@ -24,9 +24,10 @@ function NavbarComponent() {
         <Link className='navbar-brand fs-4 fw-bold' to='/' >ECOMMERCE</Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-        <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
+        <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end text-center'>
           <Nav>
             <Link to='/products' className='nav-link'>All Products</Link>
+            <Link to='/createProduct' className='nav-link'>Sell a Product</Link>
             <NavDropdown title="Categories" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Electronics</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Clothing</NavDropdown.Item>

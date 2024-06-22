@@ -6,7 +6,7 @@ import Login from './routes/Login.jsx';
 import Register from './routes/Register.jsx';
 import Home from './routes/Home.jsx';
 import Products from './routes/Products.jsx';
-
+import CreateProduct from './routes/CreateProduct.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -32,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: 'products',
         element: <Products/>
+      },
+      {
+        path: 'createProduct',
+        element: <CreateProduct/>
       }
     ]
   }
