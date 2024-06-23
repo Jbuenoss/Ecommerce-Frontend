@@ -40,27 +40,34 @@ function Login() {
     }, [user, password]);
 
 
-    const urlUsers = '/User';
+    const urlUsers = '/Account/v1/login';
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.get(urlUsers);
-            const users = response.data;
-            const currentUser = users.find(u => u.email === user);
-            if (currentUser?.password === password) {
-                setUser('');
-                setPassword('');
-                setAuth({ user, password });
-                return navigate("/");
-            } else{
-                setErrorMsg("User or Passaword are not correct");
-            }
-            
+            const userData = {
+                "name": user,
+                "email": user,
+                "password": password,
+            };
+            const requisition = {
+                headers: { 'content-type': 'application/json' },
+                withCredentials: true
+            };
+            const response = await axios.post(urlUsers, JSON.stringify(userData), requisition);
+            const acessToken = response.data;
+
+            setUser('');
+            setPassword('');
+            setAuth({ user, acessToken });
+            return navigate("/");
+
         } catch (err) {
-            if(!err?.response){
+            if (!err?.response) {
                 setErrorMsg('No server response');
-            } else{
-                setErrorMsg('Login Failed');
+            } else if (err.response?.status === 400){
+                setErrorMsg('missing username or password');
+            } else if (err.response?.status === 401){
+                setErrorMsg('Invalid credentials');
             }
             errorRef.current.focus();
         }

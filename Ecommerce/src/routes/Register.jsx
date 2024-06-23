@@ -121,7 +121,7 @@ function Register() {
 
         <section className='d-flex align-items-center justify-content-center background my-sm-2 py-sm-5'>
             <div className='py-sm-5'>
-                <Row className='pb-5 pt-sm-5'>
+                <Row className='pb-5 pt-lg-5'>
                     <Col className='me-2 d-flex align-items-center justify-content-center'>
                         <img src={logo} className='img-ctm'></img>
                     </Col>
