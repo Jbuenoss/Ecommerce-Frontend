@@ -15,6 +15,7 @@ function Products() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(ProductUrl);
+                console.log(response.data);
                 setProducts(response.data);
             } catch (err) {
                 console.log(err);
