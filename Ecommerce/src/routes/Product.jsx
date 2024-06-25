@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import Category from '../components/Category';
 
@@ -14,6 +14,7 @@ function Product() {
     const { productId } = useParams();
     const productUrl = `/Product/${productId}`
     const [product, setProduct] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleProduct = async () => {
@@ -23,8 +24,11 @@ function Product() {
             } catch (err) {
                 if (!err?.response) {
                     console.log("no server response");
-                } else {
-                    console.log("internal error");
+                } else if(err.response?.status === 404) {
+                    navigate("/");
+                    alert("product not found");
+                } else{
+                    console.log("unknown error");
                 }
             }
         }
