@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode'
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import './style.css';
 
 function CreateProduct() {
     const [isOnPromotion, setIsOnPromotion] = useState(false);
@@ -123,7 +124,7 @@ function CreateProduct() {
                 </div>
 
             ) : (
-                <div>
+                <div className="warn-ctm d-flex align-items-center justify-content-center">
                     you're not logged in
                 </div>
             )}
