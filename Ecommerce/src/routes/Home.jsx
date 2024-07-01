@@ -9,6 +9,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './style.css';
 
+import { FaArrowCircleLeft } from "react-icons/fa";
+import { FaArrowCircleRight } from "react-icons/fa";
+
 function Home() {
 
     const [productsInPromotion, setProducts] = useState([]);
@@ -43,10 +46,17 @@ function Home() {
 
             <Container className='card-wrapper mb-4'>
                 <h2 className='text-center mt-3'>Products in promotion</h2>
+                <FaArrowCircleLeft className='slide-button-ctm'/>
+                <FaArrowCircleRight className='slide-button-ctm'/>
                 <div className='card-list'>
                     {productsInPromotion.map((element) => {
                         return <CardComponent key={element.id} product={element} />
                     })}
+                </div>
+                <div className="slider-scrollbar">
+                    <div className="scrollbar-track">
+                        <div className="scrollbar-thumb"></div>
+                    </div>
                 </div>
             </Container>
         </>

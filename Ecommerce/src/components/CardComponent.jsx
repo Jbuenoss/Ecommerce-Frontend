@@ -8,7 +8,7 @@ function CardComponent(props) {
 
     return (
         <Link to={`/products/${props.product.id}`} className='link-ctm'>
-            <Card className='card-ctm mt-3 ms-2 me-2'>
+            <Card className='card-ctm mt-3 me-3'>
                 <Card.Img className='card-img-ctm' variant="top" src={photoProduct} />
                 <Card.Body className='card-body-ctm d-flex flex-column' >
                     <Card.Title>{props.product.name}</Card.Title>

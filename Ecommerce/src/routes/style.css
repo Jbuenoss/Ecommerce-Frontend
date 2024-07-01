@@ -88,6 +88,52 @@ Form {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     overflow-x: auto;
+    scrollbar-width: none;
+    margin-bottom:10px;
+}
+.card-list::-webkit-scrollbar{
+    display:none;
+}
+.slider-scrollbar{
+    height: 24px;
+    width: 100%;
+    display:flex;
+    align-items:center;
+}
+.slider-scrollbar .scrollbar-track{
+    height: 2px;
+    width: 100%;
+    background-color: #A28DE9;
+    position: relative;
+    border-radius:4px;
+}
+.slider-scrollbar:hover .scrollbar-track{
+    height: 4px;
+}
+.slider-scrollbar .scrollbar-thumb{
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    background-color: black;
+    border-radius:inherit;
+    cursor:grab;
+}
+.slider-scrollbar .scrollbar-thumb:active{
+    cursor:grabbing;
+    height: 8px;
+    top:-2px;
+}
+.slider-scrollbar .scrollbar-thumb::after{
+    content: "";
+    position: absolute;
+    left:0;
+    right:0;
+    top:-10px;
+    bottom: -10px;
+}
+.slide-button-ctm{
+    color: #A28DE9;
+    font-size:25px;
 }
 
 .img-ctm{
