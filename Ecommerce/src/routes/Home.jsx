@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from '../api/axios';
 
 import CardComponent from '../components/CardComponent';
+import mockProducts from '../mock/mockProducts';
 
 import imgMain from '../assets/Ecommerce_rigth-removebg-preview.png';
 import Container from 'react-bootstrap/Container';
@@ -24,7 +25,7 @@ function Home() {
 
                 setProducts(allProducts.filter(product => product.isOnPromotion === false));
             } catch (err) {
-                console.log(err);
+                setProducts(mockProducts.filter(product => product.category == 1 || product.category == 2));
             }
         }
 
