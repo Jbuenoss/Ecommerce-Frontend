@@ -14,11 +14,12 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 import { FaArrowCircleRight } from "react-icons/fa";
 
 function Home() {
-
+    const [isLoading, setIsLoading] = useState(true);
     const [productsInPromotion, setProducts] = useState([]);
     const productsUrl = '/Product';
     useEffect(() => {
         const fetchProducts = async () => {
+            setIsLoading(true);
             try {
                 const response = await axios.get(productsUrl);
                 const allProducts = response.data;
@@ -26,6 +27,8 @@ function Home() {
                 setProducts(allProducts.filter(product => product.isOnPromotion === false));
             } catch (err) {
                 setProducts(mockProducts.filter(product => product.category == 1 || product.category == 2));
+            } finally {
+                setIsLoading(false);
             }
         }
 
@@ -47,13 +50,17 @@ function Home() {
 
             <Container className='card-wrapper mb-4'>
                 <h2 className='text-center mt-3'>Products in promotion</h2>
-                <FaArrowCircleLeft className='slide-button-ctm'/>
-                <FaArrowCircleRight className='slide-button-ctm'/>
-                <div className='card-list'>
-                    {productsInPromotion.map((element) => {
-                        return <CardComponent key={element.id} product={element} />
-                    })}
-                </div>
+                <FaArrowCircleLeft className='slide-button-ctm' />
+                <FaArrowCircleRight className='slide-button-ctm' />
+                {isLoading ?
+                    <h2 className='card-list-loading d-flex justify-content-center align-items-center'>Loading...</h2> :
+                    <div className='card-list'>
+                        {productsInPromotion.map((element) => {
+                            return <CardComponent key={element.id} product={element} />
+                        })}
+                    </div>
+                }
+
                 <div className="slider-scrollbar">
                     <div className="scrollbar-track">
                         <div className="scrollbar-thumb"></div>
