@@ -50,16 +50,18 @@ function Home() {
 
             <Container className='card-wrapper mb-4'>
                 <h2 className='text-center mt-3'>Products in promotion</h2>
-                <FaArrowCircleLeft className='slide-button-ctm' />
-                <FaArrowCircleRight className='slide-button-ctm' />
-                {isLoading ?
-                    <h2 className='card-list-loading d-flex justify-content-center align-items-center'>Loading...</h2> :
-                    <div className='card-list'>
-                        {productsInPromotion.map((element) => {
-                            return <CardComponent key={element.id} product={element} />
-                        })}
-                    </div>
-                }
+                <div className="slide-wrapper">
+                    <FaArrowCircleLeft className='slide-button-ctm' id='prev-slide' />
+                    {isLoading ?
+                        <h2 className='card-list-loading d-flex justify-content-center align-items-center'>Loading...</h2> :
+                        <div className='card-list'>
+                            {productsInPromotion.map((element) => {
+                                return <CardComponent key={element.id} product={element} />
+                            })}
+                        </div>
+                    }
+                    <FaArrowCircleRight className='slide-button-ctm' id='next-slide' />
+                </div>
 
                 <div className="slider-scrollbar">
                     <div className="scrollbar-track">

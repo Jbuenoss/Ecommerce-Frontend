@@ -82,6 +82,7 @@ Form {
 
 .card-wrapper {
     max-width: 100%;
+    position: relative;
 }
 
 .card-list {
@@ -135,9 +136,23 @@ Form {
     top:-10px;
     bottom: -10px;
 }
-.slide-button-ctm{
+.slide-wrapper{
+    position: relative;
+}
+.card-wrapper .slide-button-ctm{
     color: #A28DE9;
-    font-size:25px;
+    font-size:35px;
+    cursor: pointer;
+    outline: none;
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+.slide-button-ctm#prev-slide{
+    left:-20px;
+}
+.slide-button-ctm#next-slide{
+    right:-20px;
 }
 
 .img-ctm{
