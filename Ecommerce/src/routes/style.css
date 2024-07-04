@@ -67,7 +67,7 @@ Form {
 }
 
 .img-banner {
-    background: linear-gradient(hsl(254, 68%, 73%), hsl(254, 68%, 83%));
+    background: linear-gradient(hsl(254, 68%, 73%), white);
     width: 100%;
 }
 
@@ -80,43 +80,8 @@ Form {
     object-fit: cover;
 }
 
-.card-wrapper {
-    max-width: 100%;
-    position: relative;
-}
-
-.card-list {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    overflow-x: auto;
-    scrollbar-width: none;
-    margin-bottom:10px;
-    position:relative;
+.card-list-loading {
     height: 400px;
-}
-
-.card-list::-webkit-scrollbar{
-    display:none;
-}
-
-.card-wrapper .slide-button-ctm{
-    color: hsl(0, 0%, 30%);
-    font-size:35px;
-    cursor: pointer;
-    outline: none;
-    position:absolute;
-    top:60%;
-    transform: translateY(-50%);
-    z-index:10;
-}
-.card-wrapper .slide-button-ctm:hover{
-    color: hsl(0, 0%, 20%);
-}
-.slide-button-ctm#prev-slide{
-    left:20px;
-}
-.slide-button-ctm#next-slide{
-    right:15px;
 }
 
 .img-ctm{

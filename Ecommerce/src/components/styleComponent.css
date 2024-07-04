@@ -27,6 +27,7 @@
 .Nav-bg-white .nav-dropdown:hover {
     color: hsl(0, 0%, 20%);
 }
+
 .card-ctm{
     width:200px;
     min-width: 200;
@@ -46,6 +47,8 @@
 }
 
 .card-body-ctm{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     height: 180px;
 }
 
@@ -65,4 +68,43 @@ p a{
 
 .link-ctm{
     text-decoration:none;
+}
+
+.card-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-bottom:10px;
+    position:relative;
+    height: 400px;
+    white-space: nowrap;
+}
+.card-list::-webkit-scrollbar{
+    display:none;
+}
+
+.card-wrapper .slide-button-ctm{
+    color: hsl(0, 0%, 30%);
+    font-size:35px;
+    cursor: pointer;
+    outline: none;
+    position:absolute;
+    top:60%;
+    transform: translateY(-50%);
+    z-index:10;
+}
+.card-wrapper .slide-button-ctm:hover{
+    color: hsl(0, 0%, 20%);
+}
+.slide-button-ctm#prev-slide{
+    left:20px;
+}
+.slide-button-ctm#next-slide{
+    right:15px;
+}
+
+.card-wrapper {
+    max-width: 100%;
+    position: relative;
 }
