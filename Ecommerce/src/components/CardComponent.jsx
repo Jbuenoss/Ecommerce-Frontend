@@ -11,7 +11,7 @@ function CardComponent(props) {
             <Card className='card-ctm mt-3 mx-2'>
                 <Card.Img className='card-img-ctm' variant="top" src={photoProduct} />
                 <Card.Body className='card-body-ctm d-flex flex-column' >
-                    <Card.Title>{props.product.name}</Card.Title>
+                    <Card.Title className='card-text-ctm'>{props.product.name}</Card.Title>
                     <Card.Text className='mt-auto mb-1'>
                         price: {props.product.price}
                     </Card.Text>

@@ -47,9 +47,16 @@
 }
 
 .card-body-ctm{
-    word-wrap: break-word;
-    overflow-wrap: break-word;
     height: 180px;
+}
+
+.card-text-ctm{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
 
 .footer-ctm{

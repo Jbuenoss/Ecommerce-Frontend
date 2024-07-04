@@ -24,7 +24,12 @@ const mockProducts = [
     { id: 22, name: 'Hat', stock:10, description: 'Stylish and comfortable hat.', category: 1, price: 24.99, isOnPromotion:true  },
     { id: 23, name: 'Science Fiction Book', stock:10, description: 'A captivating science fiction book.', category: 2, price: 21.99, isOnPromotion:true },
     { id: 24, name: 'Monitor', stock:960, description: '27-inch 4K monitor.', category: 3, price: 299.99, isOnPromotion:false },
-    { id: 25, name: 'Board Game', stock:180, description: 'Fun and strategic board game.', category: 4, price: 34.99, isOnPromotion:true  }
+    { id: 25, name: 'Board Game', stock:180, description: 'Fun and strategic board game.', category: 4, price: 34.99, isOnPromotion:true },
+    { id: 26, name: 'Ultra High Definition Curved Screen Television', stock: 7, description: 'A top-tier television with an ultra high definition curved screen for the ultimate viewing experience.', category: 0, price: 1599.99, isOnPromotion: true },
+    { id: 27, name: 'Premium Waterproof and Windproof Hiking Jacket', stock: 12, description: 'A premium waterproof and windproof hiking jacket perfect for all outdoor activities.', category: 1, price: 249.99, isOnPromotion: true },
+    { id: 28, name: 'Comprehensive Guide to Modern Art Techniques', stock: 50, description: 'An extensive book covering modern art techniques and methods for aspiring artists.', category: 2, price: 39.99, isOnPromotion: true },
+    { id: 29, name: 'High Performance Multi-Functional Gaming Laptop', stock: 15, description: 'A high-performance multi-functional gaming laptop with cutting-edge specifications.', category: 3, price: 2199.99, isOnPromotion: true },
+    { id: 30, name: 'Advanced Programmable Flying Drone with Camera', stock: 20, description: 'An advanced programmable flying drone equipped with a high-definition camera.', category: 4, price: 699.99, isOnPromotion: true },
 ];
 
 export default mockProducts;
