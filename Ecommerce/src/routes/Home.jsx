@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from '../api/axios';
 
 import CardComponent from '../components/CardComponent';
 import mockProducts from '../mock/mockProducts';
 
 import imgMain from '../assets/Ecommerce_rigth-removebg-preview.png';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './style.css';
@@ -14,9 +13,14 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 import { FaArrowCircleRight } from "react-icons/fa";
 
 function Home() {
+    const cardListRef = useRef(null);
+    const prevButtonRef = useRef(null);
+    const nextButtonRef = useRef(null);
+
     const [isLoading, setIsLoading] = useState(true);
     const [productsInPromotion, setProducts] = useState([]);
     const productsUrl = '/Product';
+
     useEffect(() => {
         const fetchProducts = async () => {
             setIsLoading(true);
@@ -32,8 +36,24 @@ function Home() {
             }
         }
 
+        prevButtonRef.current.style.display = "none";
+
         fetchProducts();
     }, []);
+
+    const handleSlideButton = (e) => {
+        const cardList = cardListRef.current;
+
+        const direction = e.target.id === 'prev-slide' ? -0.5 : 0.5;
+        const scrollAmount = cardList.clientWidth * direction;
+        const maxScrollLeft = cardList.scrollWidth - cardList.clientWidth;
+
+        cardList.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        setTimeout(() => {
+            prevButtonRef.current.style.display = cardList.scrollLeft <= 0 ? "none" : "block";
+            nextButtonRef.current.style.display = cardList.scrollLeft >= maxScrollLeft ? "none" : "block";
+        }, 700)
+    }
 
     return (
         <>
@@ -48,27 +68,21 @@ function Home() {
                 </Row>
             </div>
 
-            <Container className='card-wrapper mb-4'>
+            <div className='card-wrapper mb-4 mx-5'>
                 <h2 className='text-center mt-3'>Products in promotion</h2>
                 <div className="slide-wrapper">
-                    <FaArrowCircleLeft className='slide-button-ctm' id='prev-slide' />
+                    <span ref={prevButtonRef}><FaArrowCircleLeft onClick={handleSlideButton} className='slide-button-ctm' id='prev-slide' /></span>
                     {isLoading ?
-                        <h2 className='card-list-loading d-flex justify-content-center align-items-center'>Loading...</h2> :
-                        <div className='card-list'>
+                        <h2 className='card-list d-flex justify-content-center align-items-center'>Loading...</h2> :
+                        <div className='card-list' ref={cardListRef}>
                             {productsInPromotion.map((element) => {
                                 return <CardComponent key={element.id} product={element} />
                             })}
                         </div>
                     }
-                    <FaArrowCircleRight className='slide-button-ctm' id='next-slide' />
+                    <span ref={nextButtonRef}><FaArrowCircleRight onClick={handleSlideButton} className='slide-button-ctm' id='next-slide' /></span>
                 </div>
-
-                <div className="slider-scrollbar">
-                    <div className="scrollbar-track">
-                        <div className="scrollbar-thumb"></div>
-                    </div>
-                </div>
-            </Container>
+            </div>
         </>
     );
 }
