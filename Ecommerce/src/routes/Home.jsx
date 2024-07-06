@@ -12,10 +12,13 @@ import './style.css';
 
 
 function Home() {
-    const cardListRef = useRef(null);
-
     const [isLoading, setIsLoading] = useState(true);
     const [productsInPromotion, setProducts] = useState([]);
+    const [electronicsproducts, setElectronicsProducts] = useState([]);
+    const [clothingproducts, setClothingProducts] = useState([]);
+    const [booksproducts, setBooksProducts] = useState([]);
+    const [compAndAccesproducts, setCompAndAccesProducts] = useState([]);
+    const [hobbiesproducts, setHobbiesProducts] = useState([]);
     const productsUrl = '/Product';
 
     useEffect(() => {
@@ -28,6 +31,11 @@ function Home() {
                 setProducts(allProducts.filter(product => product.isOnPromotion === false));
             } catch (err) {
                 setProducts(mockProducts.filter(product => product.isOnPromotion === true));
+                setElectronicsProducts(mockProducts.filter(product => product.category == 0));
+                setClothingProducts(mockProducts.filter(product => product.category === 1));
+                setBooksProducts(mockProducts.filter(product => product.category === 2));
+                setCompAndAccesProducts(mockProducts.filter(product => product.category === 3));
+                setHobbiesProducts(mockProducts.filter(product => product.category === 4));
             } finally {
                 setIsLoading(false);
             }
@@ -51,9 +59,19 @@ function Home() {
             
             {isLoading ?
                 <h2 className='card-list-loading d-flex justify-content-center align-items-center'>Loading...</h2> :
-                <div>
-                    <h2 className='text-center mt-3 text-secondary'>Products in promotion</h2>
+                <div className='text-capitalize'>
+                    <h2 className='text-center mt-3 text-secondary'>Products on promotion</h2>
                     <SliderBar products={productsInPromotion} />
+                    <h2 className='text-center mt-3 text-secondary'>electronics</h2>
+                    <SliderBar products={electronicsproducts} />
+                    <h2 className='text-center mt-3 text-secondary'>clothing</h2>
+                    <SliderBar products={clothingproducts} />
+                    <h2 className='text-center mt-3 text-secondary'>books</h2>
+                    <SliderBar products={booksproducts} />
+                    <h2 className='text-center mt-3 text-secondary'>Computers And Accessories</h2>
+                    <SliderBar products={compAndAccesproducts} />
+                    <h2 className='text-center mt-3 text-secondary'>hobbies</h2>
+                    <SliderBar products={hobbiesproducts} />
                 </div>
                 
             }

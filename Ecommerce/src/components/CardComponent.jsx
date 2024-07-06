@@ -12,7 +12,7 @@ function CardComponent(props) {
                 <Card.Img className='card-img-ctm' variant="top" src={photoProduct} />
                 <Card.Body className='card-body-ctm d-flex flex-column' >
                     <Card.Title className='card-text-ctm'>{props.product.name}</Card.Title>
-                    <Card.Text className='mt-auto mb-1'>
+                    <Card.Text className='mt-auto mb-1 price-text-ctm'>
                         price: {props.product.price}
                     </Card.Text>
                     <Card.Text>

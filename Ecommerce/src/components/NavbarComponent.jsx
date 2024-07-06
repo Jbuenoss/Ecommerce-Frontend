@@ -28,17 +28,8 @@ function NavbarComponent() {
           <Nav>
             <Link to='/products' className='nav-link'>All Products</Link>
             <Link to='/createProduct' className='nav-link'>Sell a Product</Link>
-            <NavDropdown title="Categories" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Electronics</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Clothing</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Books</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">ComputersAndAccessories</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">Hobbies</NavDropdown.Item>
-            </NavDropdown>
-
             <Link className='nav-link' to='login'>Sign In</Link>
             <Link className='nav-link' to='register'>Sign Up</Link>
-
           </Nav>
         </Navbar.Collapse>
 
