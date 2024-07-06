@@ -101,3 +101,8 @@ Form {
 .warn-ctm{
     height: 500px;
 }
+
+.text-search-ctm{
+    width:80vw;
+    height: 40px;
+}
