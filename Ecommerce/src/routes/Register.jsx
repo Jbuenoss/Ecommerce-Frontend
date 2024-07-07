@@ -51,6 +51,17 @@ function Register() {
     //to focus in the name input when open this page
     useEffect(() => {
         userRef.current.focus();
+
+        const checkHealth = async () => {
+            const healthUrl = '/health';
+            try{
+                const response = await axios.get(healthUrl);
+            } catch(err){
+                setErrorMsg("the API is not runnig");
+            }
+        }
+        checkHealth();
+
     }, []);
 
     //logic to validate the name

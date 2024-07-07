@@ -14,7 +14,6 @@ import axios from '../api/axios';
 //react-router
 import { Link, useNavigate } from 'react-router-dom';
 
-import './style.css';
 
 //regex for validation
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -24,15 +23,28 @@ function Login() {
     const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errorRef = useRef();
+    const [disableButton, setDisableButton] = useState(true);
 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const navigate = useNavigate();
-
+    
     //to focus in the name input when open this page
     useEffect(() => {
         userRef.current.focus();
+
+        const checkHealth = async () => {
+            const healthUrl = '/health';
+            try{
+                const response = await axios.get(healthUrl);
+                setDisableButton(false);
+            } catch(err){
+                setDisableButton(true);
+                setErrorMsg("the API is not runnig");
+            }
+        }
+        checkHealth();
     }, []);
 
     useEffect(() => {
@@ -114,9 +126,11 @@ function Login() {
                             </Form.Group>
 
                             <Button
+                                variant=""
                                 id='text-color-white'
                                 className="mb-3 mt-5"
-                                type="submit">
+                                type="submit"
+                                disabled={disableButton}>
                                 Sign in
                             </Button>
                             <p>

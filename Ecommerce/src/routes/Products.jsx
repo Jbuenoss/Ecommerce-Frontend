@@ -19,6 +19,7 @@ function Products() {
             try {
                 const response = await axios.get(ProductUrl);
                 setProducts(response.data);
+                setFilteredProducts(response.data);
             } catch (err) {
                 setProducts(mockProducts);
                 setFilteredProducts(mockProducts);

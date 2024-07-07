@@ -12,6 +12,7 @@ function CreateProduct() {
     const [promotionPrice, setPromotionPrice] = useState(0);
     const { Auth } = useContext(AuthContext);
     const [productUrl, setProductUrl] = useState('');
+    const [errorScreenText, setErrorScreenText] = useState("you're not logged in");
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -19,6 +20,18 @@ function CreateProduct() {
     const [stock, setStock] = useState(0);
     const [category, setCategory] = useState(0);
 
+    useEffect(() => {
+        const checkHealth = async () => {
+            const healthUrl = '/health';
+            try{
+                const response = await axios.get(healthUrl);
+                setErrorScreenText("you're not logged in");
+            } catch(err){
+                setErrorScreenText("The API is not running");
+            }
+        }
+        checkHealth();
+    }, [])
 
     if (Auth?.user) {
         useEffect(() => {
@@ -125,7 +138,7 @@ function CreateProduct() {
 
             ) : (
                 <div className="warn-ctm d-flex align-items-center justify-content-center">
-                    you're not logged in
+                    {errorScreenText}
                 </div>
             )}
         </div>

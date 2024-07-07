@@ -28,7 +28,12 @@ function Home() {
                 const response = await axios.get(productsUrl);
                 const allProducts = response.data;
 
-                setProducts(allProducts.filter(product => product.isOnPromotion === false));
+                setProducts(allProducts.filter(product => product.isOnPromotion === true));
+                setElectronicsProducts(allProducts.filter(product => product.category == 0));
+                setClothingProducts(allProducts.filter(product => product.category === 1));
+                setBooksProducts(allProducts.filter(product => product.category === 2));
+                setCompAndAccesProducts(allProducts.filter(product => product.category === 3));
+                setHobbiesProducts(allProducts.filter(product => product.category === 4));
             } catch (err) {
                 setProducts(mockProducts.filter(product => product.isOnPromotion === true));
                 setElectronicsProducts(mockProducts.filter(product => product.category == 0));
