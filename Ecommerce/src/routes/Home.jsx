@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios from '../api/axios';
 
 import mockProducts from '../mock/mockProducts';
