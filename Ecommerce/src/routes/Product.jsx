@@ -15,7 +15,6 @@ import cloPhoto from '../assets/clothingCategory.jpg';
 import booPhoto from '../assets/booksphoto.jpg';
 import comPhoto from '../assets/compAndAcesPho.jpg';
 import hobPhoto from '../assets/HobbiesPho.jpg';
-import photoProduct from '../assets/Generic product.jpg';
 
 function Product() {
     const [product, setProduct] = useState(null);
