@@ -110,3 +110,14 @@ Form {
 .product-loading-ctm{
     height:380px;
 }
+.slider-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}
+.home-maxsize{
+    width:100%;
+    max-width: 1500px;
+}
