@@ -66,17 +66,17 @@ function Home() {
                 <h2 className='card-list-loading d-flex justify-content-center align-items-center'>Loading...</h2> :
                 <div className='text-capitalize d-flex justify-content-center'>
                     <div className='home-maxsize'>
-                        <h2 className='text-center mt-3'>Products on promotion</h2>
+                        <h3 className='text-center mt-3'>Products on promotion</h3>
                         <SliderBar products={productsInPromotion} />
-                        <h2 className='text-center mt-3'>electronics</h2>
+                        <h3 className='text-center mt-3'>electronics</h3>
                         <SliderBar products={electronicsproducts} />
-                        <h2 className='text-center mt-3'>clothing</h2>
+                        <h3 className='text-center mt-3'>clothing</h3>
                         <SliderBar products={clothingproducts} />
-                        <h2 className='text-center mt-3'>books</h2>
+                        <h3 className='text-center mt-3'>books</h3>
                         <SliderBar products={booksproducts} />
-                        <h2 className='text-center mt-3'>Computers And Accessories</h2>
+                        <h3 className='text-center mt-3'>Computers And Accessories</h3>
                         <SliderBar products={compAndAccesproducts} />
-                        <h2 className='text-center mt-3'>hobbies</h2>
+                        <h3 className='text-center mt-3'>hobbies</h3>
                         <SliderBar products={hobbiesproducts} />
                     </div>
                 </div>
