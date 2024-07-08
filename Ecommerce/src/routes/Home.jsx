@@ -55,7 +55,7 @@ function Home() {
                 <Row className='img-banner home-maxsize'>
                     <Col md={6} sm={12}><img src={imgMain} /></Col>
                     <Col md={6} sm={12}>
-                        <h2 className='me-md-2 me-0 text-secondary h-100 d-flex align-items-center text-center pb-5 pb-md-0'>
+                        <h2 className='me-md-2 me-0 h-100 d-flex align-items-center text-center pb-5 pb-md-0'>
                             Welcome to Ecommerce - Your Ultimate Destination for All Your Needs!
                         </h2>
                     </Col>
@@ -66,17 +66,17 @@ function Home() {
                 <h2 className='card-list-loading d-flex justify-content-center align-items-center'>Loading...</h2> :
                 <div className='text-capitalize d-flex justify-content-center'>
                     <div className='home-maxsize'>
-                        <h2 className='text-center mt-3 text-secondary'>Products on promotion</h2>
+                        <h2 className='text-center mt-3'>Products on promotion</h2>
                         <SliderBar products={productsInPromotion} />
-                        <h2 className='text-center mt-3 text-secondary'>electronics</h2>
+                        <h2 className='text-center mt-3'>electronics</h2>
                         <SliderBar products={electronicsproducts} />
-                        <h2 className='text-center mt-3 text-secondary'>clothing</h2>
+                        <h2 className='text-center mt-3'>clothing</h2>
                         <SliderBar products={clothingproducts} />
-                        <h2 className='text-center mt-3 text-secondary'>books</h2>
+                        <h2 className='text-center mt-3'>books</h2>
                         <SliderBar products={booksproducts} />
-                        <h2 className='text-center mt-3 text-secondary'>Computers And Accessories</h2>
+                        <h2 className='text-center mt-3'>Computers And Accessories</h2>
                         <SliderBar products={compAndAccesproducts} />
-                        <h2 className='text-center mt-3 text-secondary'>hobbies</h2>
+                        <h2 className='text-center mt-3'>hobbies</h2>
                         <SliderBar products={hobbiesproducts} />
                     </div>
                 </div>
