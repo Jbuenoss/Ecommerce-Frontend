@@ -27,12 +27,15 @@ function Products() {
                 setIsLoading(false);
             }
         }
-        
-        fetchData();
+        // fetchData();
+
+        setProducts(mockProducts);
+        setFilteredProducts(mockProducts);
+        setIsLoading(false);
     }, []);
 
     useEffect(() => {
-        if(products.length > 0){
+        if (products.length > 0) {
             const lowerCase = searchProducts.toLowerCase();
             setFilteredProducts(products.filter(p => p.name.toLowerCase().includes(lowerCase)));
         }
@@ -41,11 +44,11 @@ function Products() {
     return (
         <Container className='d-flex flex-wrap justify-content-center mb-4'>
             <input type='text' onChange={(e) => setSearchProducts(e.target.value)} className='text-search-ctm mt-4 fs-5'></input>
-            { isLoading ?
-            <div className='vw-100 vh-100 d-flex justify-content-center align-items-center'>Loading</div> : 
-            filteredProducts.map((element) => {
-                return <CardComponent key={element.id} product={element} />
-            })}
+            {isLoading ?
+                <div className='vw-100 vh-100 d-flex justify-content-center align-items-center'>Loading</div> :
+                filteredProducts.map((element) => {
+                    return <CardComponent key={element.id} product={element} />
+                })}
         </Container>
     );
 }

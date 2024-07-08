@@ -49,9 +49,7 @@ function Product() {
                 setIsLoading(false);
             } catch (err) {
                 if (!err?.response) {
-                    console.log(productId);
-                    setProduct(mockProducts.find(product => product.id.toString() === productId));
-                    setIsLoading(false);
+                    console.log("server error");
                 } else if (err.response?.status === 404) {
                     navigate("/");
                     alert("product not found");
@@ -60,11 +58,13 @@ function Product() {
                 }
             }
         }
-        handleProduct();
+        // handleProduct();
+        setProduct(mockProducts.find(product => product.id.toString() === productId));
+        setIsLoading(false);
     }, []);
 
     return (
-        <div>
+        <div className='heigth-min-ctm d-flex flex-column justify-content-center'>
             <div className='mx-4 my-3'>
                 {isLoading ?
                     <div className='product-loading-ctm border d-flex justify-content-center align-items-center'>
@@ -94,11 +94,7 @@ function Product() {
                     </div>
                 </section>
             </div>
-
         </div>
-
-
-
     );
 }
 

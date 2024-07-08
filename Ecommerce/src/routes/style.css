@@ -121,3 +121,7 @@ Form {
     width:100%;
     max-width: 1500px;
 }
+
+.heigth-min-ctm{
+    min-height: 75vh;
+}

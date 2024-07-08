@@ -9,8 +9,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './style.css';
 
-
-
 function Home() {
     const [isLoading, setIsLoading] = useState(true);
     const [productsInPromotion, setProducts] = useState([]);
@@ -35,18 +33,20 @@ function Home() {
                 setCompAndAccesProducts(allProducts.filter(product => product.category === 3));
                 setHobbiesProducts(allProducts.filter(product => product.category === 4));
             } catch (err) {
-                setProducts(mockProducts.filter(product => product.isOnPromotion === true));
-                setElectronicsProducts(mockProducts.filter(product => product.category == 0));
-                setClothingProducts(mockProducts.filter(product => product.category === 1));
-                setBooksProducts(mockProducts.filter(product => product.category === 2));
-                setCompAndAccesProducts(mockProducts.filter(product => product.category === 3));
-                setHobbiesProducts(mockProducts.filter(product => product.category === 4));
+                console.log(err);
             } finally {
                 setIsLoading(false);
             }
         }
-
-        fetchProducts();
+        // fetchProducts();
+        //adapting for frontend deploy
+        setProducts(mockProducts.filter(product => product.isOnPromotion === true));
+        setElectronicsProducts(mockProducts.filter(product => product.category == 0));
+        setClothingProducts(mockProducts.filter(product => product.category === 1));
+        setBooksProducts(mockProducts.filter(product => product.category === 2));
+        setCompAndAccesProducts(mockProducts.filter(product => product.category === 3));
+        setHobbiesProducts(mockProducts.filter(product => product.category === 4));
+        setIsLoading(false);
     }, []);
 
     return (

@@ -29,26 +29,26 @@ function Login() {
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const navigate = useNavigate();
-    
+
     //to focus in the name input when open this page
     useEffect(() => {
         userRef.current.focus();
-
         const checkHealth = async () => {
             const healthUrl = '/health';
-            try{
+            try {
                 const response = await axios.get(healthUrl);
                 setDisableButton(false);
-            } catch(err){
-                setDisableButton(true);
-                setErrorMsg("the API is not runnig");
+            } catch (err) {
+                console.log(err);
             }
         }
-        checkHealth();
+        // checkHealth();
+        setDisableButton(true);
     }, []);
 
     useEffect(() => {
-        setErrorMsg('');
+        // setErrorMsg('');
+        setErrorMsg("the API is not runnig");
     }, [user, password]);
 
 
@@ -76,9 +76,9 @@ function Login() {
         } catch (err) {
             if (!err?.response) {
                 setErrorMsg('No server response');
-            } else if (err.response?.status === 400){
+            } else if (err.response?.status === 400) {
                 setErrorMsg('missing username or password');
-            } else if (err.response?.status === 401){
+            } else if (err.response?.status === 401) {
                 setErrorMsg('Invalid credentials');
             }
             errorRef.current.focus();

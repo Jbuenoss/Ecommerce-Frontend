@@ -30,7 +30,8 @@ function CreateProduct() {
                 setErrorScreenText("The API is not running");
             }
         }
-        checkHealth();
+        // checkHealth();
+        setErrorScreenText("The API is not running");
     }, [])
 
     if (Auth?.user) {
@@ -76,7 +77,7 @@ function CreateProduct() {
     }
 
     return (
-        <div>
+        <div className="heigth-min-ctm d-flex flex-column justify-content-center">
             {Auth?.user ? (
                 <div className="d-flex justify-content-center align-items-center my-3">
                     <Form className='border p-4' onSubmit={handleSubmit}>

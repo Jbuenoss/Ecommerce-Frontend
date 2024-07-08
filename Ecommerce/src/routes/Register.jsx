@@ -83,7 +83,8 @@ function Register() {
     }, [password, matchPassword]);
 
     useEffect(() => {
-        setErrorMsg('');
+        // setErrorMsg('');
+        setErrorMsg("the API is not runnig");
     }, [user, password, matchPassword]);
 
     async function handleSubmit(e) {
