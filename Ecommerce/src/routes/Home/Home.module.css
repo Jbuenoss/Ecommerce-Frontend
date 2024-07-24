@@ -1,0 +1,48 @@
+.homeSection{
+    width: 100%;
+}
+
+.imgBanner {
+    height: 400px;
+    background: linear-gradient(hsl(254, 68%, 73%), white);
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.imgBanner img{
+    height: 100%;
+    width: 400px;
+}
+
+.imgBanner h2{
+    min-width: 380px;
+    max-width: 420px;
+    object-fit: cover;
+    color: white;
+    font-weight: 600;
+}
+
+@media screen and (max-width:790px) {
+    .imgBanner h2{
+        min-width: 200px;
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .imgBanner {
+        height: 230px;
+    }
+    .imgBanner h2{
+        max-width: 350px;
+    }
+    .imgBanner img{
+        display: none;
+    }
+    .imgBanner h2{
+        min-width: 200px;
+    }
+}

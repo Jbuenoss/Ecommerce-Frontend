@@ -62,18 +62,8 @@ Form {
     left: -9999px;
 }
 
-.img-banner {
-    background: linear-gradient(hsl(254, 68%, 73%), white);
-    width: 100%;
-}
-
 .background-ctm{
     background-color: #A28DE9;
-}
-
-.img-banner img {
-    height: 400px;
-    object-fit: cover;
 }
 
 .card-list-loading {

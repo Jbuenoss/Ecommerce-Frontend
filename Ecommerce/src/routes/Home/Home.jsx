@@ -1,13 +1,15 @@
+//react
 import { useState, useEffect } from 'react';
-import axios from '../api/axios';
-
-import mockProducts from '../mock/mockProducts';
-
-import SliderBar from '../components/SliderBar';
-import imgMain from '../assets/Ecommerce_rigth-removebg-preview.png';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import './style.css';
+//axios
+import axios from '../../api/axios';
+//fake database
+import mockProducts from '../../mock/mockProducts';
+//component and img
+import SliderBar from '../../components/SliderBar';
+import imgMain from '../../assets/Ecommerce_rigth-removebg-preview.png';
+//css
+import '../style.css';
+import styles from './Home.module.css';
 
 function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -50,16 +52,12 @@ function Home() {
     }, []);
 
     return (
-        <>
-            <div className='img-banner d-flex justify-content-center align-items-center text-center'>
-                <Row className='img-banner home-maxsize'>
-                    <Col md={6} sm={12}><img src={imgMain} /></Col>
-                    <Col md={6} sm={12}>
-                        <h2 className='me-md-2 me-0 h-100 d-flex align-items-center text-center pb-5 pb-md-0'>
-                            Welcome to Ecommerce - Your Ultimate Destination for All Your Needs!
-                        </h2>
-                    </Col>
-                </Row>
+        <section className={`${styles.homeSection}`}>
+            <div className={`${styles.imgBanner} home-maxsize`}>
+                <img src={imgMain}/>
+                <h2>
+                    Welcome to Ecommerce - Your Ultimate Destination for All Your Needs!
+                </h2>
             </div>
 
             {isLoading ?
@@ -81,7 +79,7 @@ function Home() {
                     </div>
                 </div>
             }
-        </>
+        </section>
     );
 }
 
