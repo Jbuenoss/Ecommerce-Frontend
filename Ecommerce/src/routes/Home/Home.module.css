@@ -25,6 +25,10 @@
     font-weight: 600;
 }
 
+.sessionName{
+    margin-bottom:-10px;
+}
+
 @media screen and (max-width:790px) {
     .imgBanner h2{
         min-width: 200px;

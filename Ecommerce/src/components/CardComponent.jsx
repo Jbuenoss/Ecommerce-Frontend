@@ -30,14 +30,14 @@ function CardComponent(props) {
 
     return (
         <Link to={`/products/${props.product.id}`} className='link-ctm'>
-            <Card className='card-ctm mt-3 mx-2'>
+            <Card className='card-ctm mt-3 mx-1 mx-sm-2'>
                 <Card.Img className='card-img-ctm' variant="top" src={imgSrc} />
                 <Card.Body className='card-body-ctm d-flex flex-column' >
                     <Card.Title className='card-text-ctm'>{props.product.name}</Card.Title>
-                    <Card.Text className='mt-auto mb-1 price-text-ctm'>
+                    <Card.Text className='mt-auto mb-1 price-text-ctm card-text'>
                         price: {props.product.price}
                     </Card.Text>
-                    <Card.Text>
+                    <Card.Text className="card-text">
                         Quantity: {props.product.stock}
                     </Card.Text>
                 </Card.Body>

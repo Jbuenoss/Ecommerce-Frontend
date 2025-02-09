@@ -29,7 +29,7 @@ function SliderBar(props) {
     }
 
     return (
-        <div className='card-wrapper mb-4 mx-5'>
+        <div className='card-wrapper mb-sm-4 mx-sm-4'>
             <div className="slide-wrapper">
                 <span ref={prevButtonRef}><FaArrowCircleLeft onClick={handleSlideButton} className='slide-button-ctm' id='prev-slide' /></span>
                 <div className='card-list' ref={cardListRef}>
